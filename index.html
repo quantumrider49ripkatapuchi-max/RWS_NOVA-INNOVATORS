@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Field Shift | RWS NOVA INNOVATORS — NASA Space Apps Challenge</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=Figtree:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f4f7ef;--card:#ffffff;--ink:#1d2b22;--mute:#5a6b5f;--green:#2f6b45;--leaf:#8bc17a;--sun:#f0a83a;--sky:#cfe3f1;--line:rgba(29,43,34,.14);color-scheme:light dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root:not([data-theme="light"]){}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#121a15;--card:#1a251e;--ink:#eef3ea;--mute:#a4b5a8;--green:#7fc496;--line:rgba(238,243,234,.16)}}
+:root[data-theme="dark"]{--paper:#121a15;--card:#1a251e;--ink:#eef3ea;--mute:#a4b5a8;--green:#7fc496;--line:rgba(238,243,234,.16)}
+html{scroll-behavior:smooth;scroll-padding-top:calc(72px + env(safe-area-inset-top,0px))}*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Figtree,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:1.05rem;line-height:1.65}
+h1,h2,h3,h4{font-family:Fraunces,Georgia,"Times New Roman",serif;line-height:1.1;margin:0}
+a{color:inherit}a:focus-visible,button:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+nav{position:fixed;top:0;left:0;right:0;z-index:10;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:calc(12px + env(safe-area-inset-top,0px)) max(18px,3vw) 12px;background:rgba(20,28,40,.45);backdrop-filter:blur(10px);color:#fff}
+.logo{font-family:Fraunces,Georgia,serif;font-weight:800;text-decoration:none;font-size:1.1rem}
+.links{display:flex;gap:22px}.links a{text-decoration:none;font-size:.95rem;opacity:.85}.links a:hover{opacity:1}
+.go{display:inline-block;background:var(--sun);color:#3a2300;font-weight:700;text-decoration:none;border-radius:999px;padding:13px 26px;box-shadow:0 0 0 0 rgba(240,168,58,.6),0 8px 26px rgba(240,168,58,.45);animation:halo 2.8s infinite}
+.go.sm{padding:9px 18px;font-size:.85rem}
+@keyframes halo{70%{box-shadow:0 0 0 16px rgba(240,168,58,0),0 8px 26px rgba(240,168,58,.45)}100%{box-shadow:0 0 0 0 rgba(240,168,58,0),0 8px 26px rgba(240,168,58,.45)}}
+.soft{display:inline-block;border:2px solid rgba(255,255,255,.7);color:#fff;border-radius:999px;padding:11px 24px;text-decoration:none;font-weight:700}.soft:hover{background:rgba(255,255,255,.14)}
+#home{position:relative;min-height:100vh;min-height:100svh;overflow:hidden;background:linear-gradient(180deg,#141f3d 0%,#3b3f7a 32%,#c9748a 62%,#f6b36b 86%,#fbd9a0 100%);color:#fff;display:flex;align-items:center}
+.stars{position:absolute;inset:0;background-image:radial-gradient(1.5px 1.5px at 12% 18%,#fff,transparent),radial-gradient(1px 1px at 30% 8%,#fff,transparent),radial-gradient(1.5px 1.5px at 52% 22%,#fff,transparent),radial-gradient(1px 1px at 70% 10%,#fff,transparent),radial-gradient(1.5px 1.5px at 86% 26%,#fff,transparent),radial-gradient(1px 1px at 22% 34%,#fff,transparent),radial-gradient(1px 1px at 92% 6%,#fff,transparent);opacity:.85;-webkit-mask-image:linear-gradient(#000 40%,transparent 75%);mask-image:linear-gradient(#000 40%,transparent 75%)}
+.sun{position:absolute;left:50%;bottom:16%;width:min(46vw,380px);aspect-ratio:1;border-radius:50%;transform:translateX(-50%);background:radial-gradient(circle,#fff6d5 0,#ffd78a 35%,rgba(255,190,110,.0) 70%)}
+.hills{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:36%}
+.sat{position:absolute;top:17%;left:-60px;width:44px;animation:drift 38s linear infinite}
+@keyframes drift{to{transform:translate(calc(100vw + 120px),50px)}}
+.wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:center;width:100%;max-width:1240px;margin:0 auto;padding:110px max(22px,5vw) 150px}
+.kick{font-size:.88rem;opacity:.9;margin:0 0 16px}
+h1{font-size:clamp(3.4rem,9vw,7rem);font-weight:800;letter-spacing:-.02em;margin-bottom:16px;text-shadow:0 4px 30px rgba(20,20,60,.35)}
+.tag{font-family:Fraunces,Georgia,serif;font-size:clamp(1.3rem,2.6vw,1.9rem);margin:0 0 14px;max-width:24ch;line-height:1.25}
+.say{max-width:46ch;opacity:.92;margin:0 0 28px}
+.btns{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+#c{width:100%;height:min(60vh,480px);display:block;cursor:grab;touch-action:pan-y}
+.cap{text-align:center;font-size:.85rem;opacity:.85;margin-top:4px}
+section{max-width:1120px;margin:0 auto;padding:100px max(22px,5vw) 10px}
+h2{font-size:clamp(2rem,4.4vw,3.2rem);font-weight:600;margin-bottom:14px;max-width:20ch}
+.lead{color:var(--mute);max-width:58ch;margin:0 0 36px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:28px 20px 30px 22px;padding:26px;box-shadow:0 10px 30px rgba(20,40,25,.08)}
+.card:nth-child(even){border-radius:20px 30px 22px 28px}
+.card h4{font-size:1.3rem;margin-bottom:8px}.card p{margin:0;color:var(--mute);font-size:.98rem}
+.card small{display:block;color:var(--green);font-weight:700;margin-bottom:8px;font-size:.85rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.worry{display:grid;grid-template-columns:1.2fr 1fr;gap:34px;align-items:center}
+.worry blockquote{margin:0;font-family:Fraunces,Georgia,serif;font-size:clamp(1.5rem,2.8vw,2.2rem);line-height:1.3;border-left:5px solid var(--sun);padding-left:22px}
+.risks{display:grid;gap:12px}.risks div{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px 18px}.risks b{display:block}.risks span{color:var(--mute);font-size:.95rem}
+.note{margin-top:18px;font-size:.88rem;color:var(--mute);border-top:1px dashed var(--line);padding-top:12px}
+.path{position:relative;display:grid;gap:22px;padding-left:64px}
+.path::before{content:"";position:absolute;left:23px;top:8px;bottom:8px;width:3px;border-radius:3px;background:repeating-linear-gradient(var(--leaf) 0 10px,transparent 10px 18px)}
+.step{position:relative}.step .dot{position:absolute;left:-64px;top:14px;width:48px;height:48px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-family:Fraunces,serif;font-weight:800;font-size:1.2rem;box-shadow:0 0 0 6px var(--paper)}
+.read{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:26px}
+.read div{background:linear-gradient(160deg,var(--sky),#e6f0f7);color:#1d2b22;border-radius:20px;padding:16px 18px}.read small{display:block;opacity:.7}.read b{font-size:1.1rem}
+.big{display:flex;gap:46px;flex-wrap:wrap;margin-bottom:28px}.big b{display:block;font-family:Fraunces,serif;font-size:3.4rem;color:var(--green);line-height:1}.big span{color:var(--mute)}
+.tg{display:inline-block;font-size:.75rem;font-weight:700;color:#fff;background:#0b3d91;border-radius:8px;padding:3px 9px;margin-bottom:10px}
+.team .card{text-align:center}.av{width:84px;height:84px;margin:0 auto 14px;border-radius:50% 46% 52% 48%;display:grid;place-items:center;font-family:Fraunces,serif;font-weight:800;font-size:1.8rem;color:#fff}
+.final{margin:110px max(18px,4vw) 0;border-radius:36px;padding:70px 24px;text-align:center;color:#fff;background:linear-gradient(160deg,#2f6b45,#1d4a35)}
+.final h2{margin:0 auto 12px;max-width:22ch;color:#fff}.final p{margin:0 0 28px;opacity:.9}
+footer{padding:34px 22px calc(34px + env(safe-area-inset-bottom,0px));text-align:center;color:var(--mute);font-size:.9rem}
+@media(max-width:860px){.links{display:none}.wrap{grid-template-columns:1fr;padding-top:96px}.worry{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.go,.sat{animation:none}html{scroll-behavior:auto}}
+
+.stage{position:relative;width:min(78vw,440px);aspect-ratio:1;margin:0 auto}
+.earth{position:absolute;inset:6%;border-radius:50%;overflow:hidden;background:#0a3a70;box-shadow:0 0 0 1px rgba(255,255,255,.25),0 0 40px 6px rgba(120,180,255,.55),0 0 120px 30px rgba(100,160,255,.28),0 30px 60px rgba(20,10,40,.5)}
+.map,.clouds{position:absolute;top:0;left:0;height:100%;width:400%;display:flex;animation:turn 150s linear infinite}
+.map svg,.clouds svg{width:25%;height:100%;flex:none}
+.clouds{opacity:.55;animation-duration:95s;mix-blend-mode:screen}
+@keyframes turn{to{transform:translateX(-50%)}}
+.shade{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 32% 28%,rgba(255,244,214,.38),transparent 38%),radial-gradient(circle at 50% 50%,transparent 52%,rgba(4,10,40,.55) 80%,rgba(3,6,28,.92) 100%);box-shadow:inset -34px -24px 70px rgba(2,6,30,.75),inset 10px 8px 40px rgba(150,200,255,.28)}
+.pin{position:absolute;left:50%;top:38%;width:14px;height:14px;margin:-7px;border-radius:50%;background:var(--sun);box-shadow:0 0 12px 3px rgba(240,168,58,.9)}
+.pin::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:2px solid var(--sun);animation:ping 2.4s ease-out infinite}
+@keyframes ping{from{transform:scale(.4);opacity:1}to{transform:scale(2.6);opacity:0}}
+.orbit{position:absolute;inset:-4%;transform:rotateX(74deg) rotateZ(-18deg);transform-style:preserve-3d;border-radius:50%;border:1px dashed rgba(255,255,255,.5)}
+.spin{position:absolute;inset:0;animation:rot 16s linear infinite}
+.osat{position:absolute;left:-4%;top:50%;width:44px;margin-top:-12px;animation:rot 16s linear infinite reverse;filter:drop-shadow(0 0 6px rgba(255,255,255,.7))}
+@keyframes rot{to{transform:rotate(360deg)}}
+.stars{animation:tw 5s ease-in-out infinite alternate}@keyframes tw{from{opacity:.55}to{opacity:.95}}
+.grain{position:absolute;inset:0;pointer-events:none;opacity:.12;mix-blend-mode:overlay}
+@media(prefers-reduced-motion:reduce){.map,.clouds,.spin,.osat,.pin::after,.stars{animation:none}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="#home">RWS NOVA INNOVATORS</a>
+  <div class="links"><a href="#home">Home</a><a href="#problem">Problem</a><a href="#solution">Solution</a><a href="#features">Features</a><a href="#team">Team</a></div>
+  <a class="go sm" href="https://sabareesh179123-ops.github.io/RWSNOVAINNOVATORS/" target="_blank" rel="noopener noreferrer">LAUNCH SIMULATION</a>
+</nav>
+
+<header id="home">
+  <div class="stars"></div><svg class="grain" width="100%" height="100%" aria-hidden="true"><filter id="gn"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2"/></filter><rect width="100%" height="100%" filter="url(#gn)"/></svg><div class="sun"></div>
+  <svg class="sat" viewBox="0 0 44 24" aria-hidden="true"><rect x="16" y="6" width="12" height="12" rx="2" fill="#fff"/><rect x="0" y="9" width="14" height="6" fill="#9ec5ff"/><rect x="30" y="9" width="14" height="6" fill="#9ec5ff"/></svg>
+  <svg class="hills" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true"><path d="M0 170C200 90 360 120 540 160S900 230 1100 150 1360 100 1440 130V300H0Z" fill="#7aa86a" opacity=".85"/><path d="M0 220C240 150 420 190 640 215S1040 250 1440 190V300H0Z" fill="#4f8a58"/><path d="M0 262C300 225 600 255 900 250S1300 235 1440 255V300H0Z" fill="#2f6b45"/></svg>
+  <div class="wrap">
+    <div>
+      <p class="kick">NASA SPACE APPS CHALLENGE 2026 | TEAM RWS NOVA INNOVATORS</p>
+      <h1>Field Shift</h1>
+      <p class="tag">Crop-Rotation &amp; Climate Control Guidance for Resilient Farms</p>
+      <p class="say">Satellites can sense moisture, canopy and climate long before it shows on the ground. We turn those signals into crop-rotation decisions a farmer can act on, in plain steps.</p>
+      <div class="btns"><a class="soft" href="#solution">Explore Our Solution</a><a class="go" href="https://sabareesh179123-ops.github.io/RWSNOVAINNOVATORS/" target="_blank" rel="noopener noreferrer">LAUNCH SIMULATION</a></div>
+    </div>
+    <div><svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="oc" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d4a82"/><stop offset=".5" stop-color="#0a3a70"/><stop offset="1" stop-color="#0d4a82"/></linearGradient><linearGradient id="ld" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfe0cf"/><stop offset=".22" stop-color="#5f9a55"/><stop offset=".42" stop-color="#b9a45e"/><stop offset=".55" stop-color="#4f9a4c"/><stop offset=".75" stop-color="#3f8a45"/><stop offset="1" stop-color="#9fb59a"/></linearGradient><filter id="bl"><feGaussianBlur stdDeviation="3"/></filter><g id="world"><rect width="360" height="180" fill="url(#oc)"/><g fill="none" stroke="#49a6c9" stroke-width="3" opacity=".45" stroke-linejoin="round"><polygon points="12,24 25,18 55,20 85,18 100,20 118,30 125,40 113,46 104,52 99,59 100,65 90,61 83,64 75,68 83,74 94,77 100,82 88,75 74,67 68,60 62,57 56,50 55,42 45,33 30,30 20,32"/><polygon points="100,82 110,80 125,82 145,95 143,105 130,125 118,138 110,143 106,125 108,110 102,98 97,90"/><polygon points="130,15 145,10 160,14 150,28 138,30 128,24"/><polygon points="171,53 172,45 180,42 186,38 192,30 200,26 200,20 215,18 240,15 270,14 300,15 330,20 352,28 335,40 328,46 318,50 305,58 298,66 290,72 285,82 278,70 268,68 262,82 256,70 248,64 240,68 232,76 225,78 222,64 212,58 205,52 195,50 188,50 180,46"/><polygon points="170,57 190,55 210,57 222,64 230,78 224,92 222,110 214,124 198,124 196,112 192,98 186,88 175,84 166,78 164,68"/><polygon points="293,114 300,104 312,100 325,96 333,110 330,122 318,128 300,124"/><ellipse cx="178" cy="40" rx="3" ry="5"/><ellipse cx="318" cy="52" rx="3" ry="7"/><ellipse cx="300" cy="92" rx="9" ry="3"/><ellipse cx="320" cy="94" rx="6" ry="3"/><ellipse cx="352" cy="134" rx="3" ry="6"/><ellipse cx="173" cy="26" rx="4" ry="3"/></g><g fill="url(#ld)" stroke="#2c6b3a" stroke-width=".6" stroke-linejoin="round"><polygon points="12,24 25,18 55,20 85,18 100,20 118,30 125,40 113,46 104,52 99,59 100,65 90,61 83,64 75,68 83,74 94,77 100,82 88,75 74,67 68,60 62,57 56,50 55,42 45,33 30,30 20,32"/><polygon points="100,82 110,80 125,82 145,95 143,105 130,125 118,138 110,143 106,125 108,110 102,98 97,90"/><polygon points="130,15 145,10 160,14 150,28 138,30 128,24"/><polygon points="171,53 172,45 180,42 186,38 192,30 200,26 200,20 215,18 240,15 270,14 300,15 330,20 352,28 335,40 328,46 318,50 305,58 298,66 290,72 285,82 278,70 268,68 262,82 256,70 248,64 240,68 232,76 225,78 222,64 212,58 205,52 195,50 188,50 180,46"/><polygon points="170,57 190,55 210,57 222,64 230,78 224,92 222,110 214,124 198,124 196,112 192,98 186,88 175,84 166,78 164,68"/><polygon points="293,114 300,104 312,100 325,96 333,110 330,122 318,128 300,124"/><ellipse cx="178" cy="40" rx="3" ry="5"/><ellipse cx="318" cy="52" rx="3" ry="7"/><ellipse cx="300" cy="92" rx="9" ry="3"/><ellipse cx="320" cy="94" rx="6" ry="3"/><ellipse cx="352" cy="134" rx="3" ry="6"/><ellipse cx="173" cy="26" rx="4" ry="3"/></g><rect y="0" width="360" height="9" fill="#e8f0f4" opacity=".9"/><rect y="164" width="360" height="16" fill="#eef4f7"/><g fill="#d8c27a" opacity=".6" filter="url(#bl)"><ellipse cx="195" cy="64" rx="22" ry="7"/><ellipse cx="228" cy="68" rx="9" ry="6"/><ellipse cx="316" cy="112" rx="10" ry="6"/></g></g><g id="cl" fill="#fff" filter="url(#bl)"><ellipse cx="40" cy="50" rx="30" ry="5"/><ellipse cx="120" cy="100" rx="38" ry="6"/><ellipse cx="200" cy="40" rx="26" ry="5"/><ellipse cx="260" cy="90" rx="34" ry="6"/><ellipse cx="320" cy="60" rx="28" ry="5"/><ellipse cx="80" cy="130" rx="30" ry="5"/><ellipse cx="170" cy="120" rx="24" ry="4"/><ellipse cx="300" cy="140" rx="30" ry="5"/></g></defs></svg><div class="stage"><div class="orbit"><div class="spin"><svg class="osat" viewBox="0 0 44 24" aria-hidden="true"><rect x="16" y="6" width="12" height="12" rx="2" fill="#fff"/><rect x="0" y="9" width="14" height="6" fill="#7fb2ff"/><rect x="30" y="9" width="14" height="6" fill="#7fb2ff"/></svg></div></div>
+<div class="earth" role="img" aria-label="The Earth slowly turning, with a marker for your field"><div class="map"><svg viewBox="0 0 360 180"><use href="#world"/></svg><svg viewBox="0 0 360 180"><use href="#world"/></svg><svg viewBox="0 0 360 180"><use href="#world"/></svg><svg viewBox="0 0 360 180"><use href="#world"/></svg></div><div class="clouds"><svg viewBox="0 0 360 180"><use href="#cl"/></svg><svg viewBox="0 0 360 180"><use href="#cl"/></svg><svg viewBox="0 0 360 180"><use href="#cl"/></svg><svg viewBox="0 0 360 180"><use href="#cl"/></svg></div><div class="shade"></div><span class="pin"></span></div></div>
+<div class="cap">Your field, seen from orbit</div></div>
+  </div>
+</header>
+
+<section id="problem">
+  <h2>Bridging orbital telemetry and local fields</h2>
+  <p class="lead">Challenge: Field Shift — Adapting Farms with NASA Data. An open agricultural decision-support initiative.</p>
+  <div class="worry">
+    <blockquote>Translating satellite moisture, canopy, and climate signals into practical crop-rotation decisions.</blockquote>
+    <div class="risks">
+      <div><b>Bare soil in the heat</b><span>Exposed monoculture gaps and bare-soil heat stress.</span></div>
+      <div><b>Frost and runoff months</b><span>Windows that Field Shift flags for you.</span></div>
+      <div><b>Slopes and pests</b><span>Sloped terrain and multi-season crop pathogens.</span></div>
+    </div>
+  </div>
+  <p class="note">[From PPT] A dedicated problem statement. The slides have no separate problem slide, so this section uses the challenge line and the risks the slides name.</p>
+</section>
+
+<section id="solution">
+  <h2>Four steps from field map to crop rotation</h2>
+  <p class="lead">Here is the path a farmer follows, from a pin on the map to a plan for next season. Behind it: Leaflet GIS sampling, a farm priority profile, NASA and Meteomatics sync, and actionable field guidance.</p>
+  <div class="path">
+    <div class="step card"><span class="dot">1</span><small>Leaflet GIS Sampling</small><h4>Define Field</h4><p>Auto-locate farm coordinates, draw custom polygons, or load regional presets.</p></div>
+    <div class="step card"><span class="dot">2</span><small>Farm Priority Profile</small><h4>Set Context</h4><p>Input baseline monoculture, irrigation capacity, and soil conservation goals.</p></div>
+    <div class="step card"><span class="dot">3</span><small>NASA &amp; Meteomatics Sync</small><h4>Diagnose Risk</h4><p>Inspect 5-year precipitation charts, NDVI health, and heat or runoff windows.</p></div>
+    <div class="step card"><span class="dot">4</span><small>Actionable Field Guidance</small><h4>Execute Plan</h4><p>Compare two adaptive rotation pathways and follow live Pipori Advisor steps.</p></div>
+  </div>
+</section>
+
+<section id="features">
+  <h2>Inside the Field Shift platform</h2>
+  <p class="lead">Everything a farmer needs in one precision polygon workspace, kept in sync with live telemetry.</p>
+  <div class="grid">
+    <div class="card"><small>Telemetry Synced</small><h4>One view of every signal</h4><p>MODIS Terra NDVI (8-day), temperature and ET, soil moisture and a climate stress scan.</p></div>
+    <div class="card"><small>Interactive Field Sampling</small><h4>Draw your own farm</h4><p>Draw custom farm polygons or test preset global farms.</p></div>
+    <div class="card"><small>Vulnerability Detection</small><h4>Know the risky months</h4><p>Flags bare-soil heat stress, frost, and runoff months.</p></div>
+    <div class="card"><small>Pipori Field Advisor</small><h4>Steps made for your farm</h4><p>Generates tailored steps based on irrigation and goals.</p></div>
+  </div>
+  <div class="read">
+    <div><small>Meteomatics Temp &amp; ET</small><b>31.4°C · 4.8 mm</b></div>
+    <div><small>Soil Moisture (-15 cm)</small><b>0.42 idx · 6% Slope</b></div>
+    <div><small>Climate Stress Scan</small><b>Summer Heat Window</b></div>
+    <div><small>Pipori Field Advisor</small><b>Plant Cowpea Cover Crop</b></div>
+  </div>
+</section>
+
+<section id="data">
+  <h2>How NASA and space telemetry power Field Shift</h2>
+  <p class="lead">Open space and Earth observation stack.</p>
+  <div class="big"><div><b>5-Yr</b><span>NASA climate baseline</span></div><div><b>8-Day</b><span>MODIS canopy cadence</span></div></div>
+  <div class="grid">
+    <div class="card"><span class="tg">NASA</span><small>5-year agroclimatology</small><h4>NASA POWER API</h4><p>Maps historical rainfall, thermal extremes, and drought windows.</p></div>
+    <div class="card"><span class="tg">NASA</span><small>8-day vegetation index</small><h4>NASA GIBS MODIS NDVI</h4><p>Tracks seasonal canopy vigor and bare-soil exposure across parcels.</p></div>
+    <div class="card"><span class="tg" style="background:#2f6b45">DATA</span><small>Subsurface telemetry</small><h4>Meteomatics Climate &amp; Soil</h4><p>Delivers -15cm soil moisture deficit and 24-hour evapotranspiration.</p></div>
+    <div class="card"><span class="tg" style="background:#2f6b45">DATA</span><small>Topographic runoff model</small><h4>Open-Meteo Elevation DEM</h4><p>Calculates terrain slope gradients across vertices to prevent erosion.</p></div>
+  </div>
+</section>
+
+<section id="impact">
+  <h2>Resilient rotation and resource optimization</h2>
+  <p class="lead">Practical field outcomes.</p>
+  <div class="grid">
+    <div class="card"><h4>Eliminate Bare-Fallow Vulnerability</h4><p>Replaces exposed monoculture gaps with nitrogen-fixing cover crops.</p></div>
+    <div class="card"><h4>Irrigation-Matched Strategies</h4><p>Calibrates crop water demand for rainfed, drip, or canal systems.</p></div>
+    <div class="card"><h4>Slope &amp; Pest Cycle Breaking</h4><p>Stabilizes sloped terrain while disrupting multi-season crop pathogens.</p></div>
+    <div class="card"><small>Future Scope</small><h4>[From PPT]</h4><p>The slides don't include a future-scope section.</p></div>
+  </div>
+</section>
+
+<section id="team" class="team">
+  <h2>The people behind Field Shift</h2>
+  <p class="lead">Six teammates, one team: RWS NOVA INNOVATORS. Resilient harvests driven by open space data.</p>
+  <div class="grid">
+    <div class="card"><div class="av" style="background:#2f6b45">G</div><h4>Gopika Babu</h4></div>
+    <div class="card"><div class="av" style="background:#c9748a">A</div><h4>A. Lakshitha</h4></div>
+    <div class="card"><div class="av" style="background:#3b6fa8">B</div><h4>B.C.Pranavadhithya</h4></div>
+    <div class="card"><div class="av" style="background:#d98a2b">A</div><h4>Aswanth.P.U</h4></div>
+    <div class="card"><div class="av" style="background:#6a5aa8">S</div><h4>Sabareesh. S</h4></div>
+    <div class="card"><div class="av" style="background:#4a8f7a">N</div><h4>Namish N.I</h4></div>
+  </div>
+</section>
+
+<div class="final"><h2>Explore live satellite telemetry and crop-rotation pathways</h2><p>See Field Shift working on a real map.</p><a class="go" href="https://sabareesh179123-ops.github.io/RWSNOVAINNOVATORS/" target="_blank" rel="noopener noreferrer">LAUNCH SIMULATION</a></div>
+
+<footer>RWS NOVA INNOVATORS | NASA Space Apps Challenge 2026 | Built with NASA Open Data</footer>
+
+
+</body>
+</html>
